@@ -36,6 +36,10 @@ app.use(express.json())
 app.use('/user',userRoutes)
 app.use('/ad',adRoutes)
 
+app.get('/',(req,res) => {
+    res.send('Server is running !')
+})
+
 app.listen(9000, (err) => {
     if (!err) {
         console.log('server is running on port 9000 !')
