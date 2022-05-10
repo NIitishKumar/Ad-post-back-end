@@ -40,7 +40,7 @@ app.get('/',(req,res) => {
     res.send('Server is running !')
 })
 
-app.listen(9000, (err) => {
+app.listen(process.env.PORT || 9000, (err) => {
     if (!err) {
         console.log('server is running on port 9000 !')
     }
