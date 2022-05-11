@@ -47,6 +47,7 @@ exports.getUserById = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(req.file, req.body)
 
     const user = await User.findByIdAndUpdate(
       { _id: id },
