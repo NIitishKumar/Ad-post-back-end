@@ -1,0 +1,7 @@
+/node_modules
+echo 'node_modules'
+git rm -r --cached node_modules
+git commit -am 'ignore node_modules'
+echo 'npm-debug.log'
+git commit -am 'ignore npm-debug'
+
