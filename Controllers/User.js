@@ -1,4 +1,5 @@
 const User = require("../Models/User");
+var jwt = require('jsonwebtoken');
 
 exports.create = async (req, res) => {
   try {
@@ -70,11 +71,15 @@ exports.signIn = async (req, res) => {
       const checkPassword = await User.findOne({ password: password });
 
       if (checkPassword) {
-        res.status(200).json({ message: "User found Success!" ,user});
+        console.log(user)
+        let token = await jwt.sign({password :user.password,email:user.email},'SECRETKEYFORUSER')
+        res.status(200).json({ message: "User found Success!" ,user,token});
+        return;
       }
     }
     res.status(201).json({ message: "User not found !" });
   } catch (err) {
+    console.log(err)
     res.status(400).json({ message: "Something went wrong !", err });
   }
 };
