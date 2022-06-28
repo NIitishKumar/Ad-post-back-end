@@ -2,13 +2,16 @@ const multer  = require('multer')
 const Image = require('../../Models/Image')
 var jwt = require('jsonwebtoken');
 const User = require('../../Models/User');
+const fs = require('fs')
 
 
 exports.uploadImage = async (req,res) => {
+    let img = fs.readFileSync(req.file.path);
+    let enc_img = img.toString('base64')
 
-    console.log(req.file)
-    await Image.create({...req.body,image:req.file.filename})
-    res.send(`http://localhost:9000/${req.file.filename}`)
+    console.log(new Buffer.from(enc_img,'base64'))
+    let image = await Image.create({...req.body,image:req.file.filename,img:{data: Buffer.from(enc_img,'base64'),contentType:req.file.mimetype}})
+    res.send(image)
 }
 
 exports.getAllImages = async (req,res) => {
