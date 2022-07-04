@@ -5,5 +5,5 @@ const Image = new mongoose.Schema({
     image:String,
     img:{data:Buffer,contentType: String}
 },{timestamps:true,versionKey:false})
-
+ 
 module.exports = mongoose.model('Image',Image)
